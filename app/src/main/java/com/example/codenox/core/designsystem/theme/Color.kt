@@ -1,5 +1,7 @@
 package com.example.codenox.core.designsystem.theme
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 // Brand
@@ -18,11 +20,21 @@ val TextSecondary = Color(0xFF7A877E)
 // Border
 val BorderPrimary = Color(0xFF121614)
 
-// Green variants
-val GreenAlpha05 = CodeNoxGreen.copy(alpha = 0.05f)
-val GreenAlpha10 = CodeNoxGreen.copy(alpha = 0.10f)
-val GreenAlpha15 = CodeNoxGreen.copy(alpha = 0.15f)
+@Immutable
+data class CodeNoxColors(
+    val primary: Color = CodeNoxGreen,
+    val secondary: Color = CodeNoxGold,
+    val tertiary: Color = CodeNoxDarkGreen,
+    val background: Color = BackgroundPrimary,
+    val surface: Color = BackgroundSecondary,
+    val textPrimary: Color = TextPrimary,
+    val textSecondary: Color = TextSecondary,
+    val border: Color = BorderPrimary,
+    val greenAlpha05: Color = CodeNoxGreen.copy(alpha = 0.05f),
+    val greenAlpha10: Color = CodeNoxGreen.copy(alpha = 0.10f),
+    val greenAlpha15: Color = CodeNoxGreen.copy(alpha = 0.15f),
+    val goldAlpha10: Color = CodeNoxGold.copy(alpha = 0.10f),
+    val goldAlpha20: Color = CodeNoxGold.copy(alpha = 0.20f)
+)
 
-// Gold variants
-val GoldAlpha10 = CodeNoxGold.copy(alpha = 0.10f)
-val GoldAlpha20 = CodeNoxGold.copy(alpha = 0.20f)
+val LocalCodeNoxColors = staticCompositionLocalOf { CodeNoxColors() }
