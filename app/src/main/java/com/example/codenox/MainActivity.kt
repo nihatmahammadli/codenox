@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 import com.example.codenox.core.navigation.AppNavigation
 
@@ -13,7 +16,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CodeNoxTheme {
-                AppNavigation()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = CodeNoxTheme.colors.background
+                ) {
+                    AppNavigation()
+                }
             }
         }
     }

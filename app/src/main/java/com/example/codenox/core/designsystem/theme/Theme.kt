@@ -25,16 +25,17 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = TextPrimary
 )
 
+// If you want a dark-themed app by default, LightColorScheme should also use dark colors
 private val LightColorScheme = lightColorScheme(
     primary = CodeNoxGreen,
     secondary = CodeNoxGold,
     tertiary = CodeNoxDarkGreen,
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onBackground = Color.Black,
-    onSurface = Color.Black
+    background = BackgroundPrimary,
+    surface = BackgroundSecondary,
+    onPrimary = Color.Black,
+    onSecondary = Color.Black,
+    onBackground = TextPrimary,
+    onSurface = TextPrimary
 )
 
 object CodeNoxTheme {
@@ -43,15 +44,15 @@ object CodeNoxTheme {
         @ReadOnlyComposable
         get() = LocalCodeNoxColors.current
 
-    val typography: androidx.compose.material3.Typography
+    val typography: CodeNoxTypography
         @Composable
         @ReadOnlyComposable
-        get() = MaterialTheme.typography
+        get() = LocalCodeNoxTypography.current
 
-    val shapes: androidx.compose.material3.Shapes
+    val shapes: CodeNoxShapes
         @Composable
         @ReadOnlyComposable
-        get() = MaterialTheme.shapes
+        get() = LocalCodeNoxShapes.current
     
     val gradients: CodeNoxGradients
         get() = CodeNoxGradients
@@ -60,7 +61,7 @@ object CodeNoxTheme {
 @Composable
 fun CodeNoxTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -73,24 +74,22 @@ fun CodeNoxTheme(
         else -> LightColorScheme
     }
 
-    val customColors = if (darkTheme) CodeNoxColors() else CodeNoxColors(
-        primary = CodeNoxGreen,
-        secondary = CodeNoxGold,
-        tertiary = CodeNoxDarkGreen,
-        background = Color.White,
-        surface = Color.White,
-        textPrimary = Color.Black,
-        textSecondary = Color.Gray,
-        border = Color.LightGray
-    )
+    // Always use CodeNoxColors() which defaults to Dark theme colors,
+    // or customize it if you actually want a different light theme later.
+    val customColors = CodeNoxColors()
+    
+    val customTypography = CodeNoxTypography()
+    val customShapes = CodeNoxShapes()
 
     CompositionLocalProvider(
-        LocalCodeNoxColors provides customColors
+        LocalCodeNoxColors provides customColors,
+        LocalCodeNoxTypography provides customTypography,
+        LocalCodeNoxShapes provides customShapes
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = Typography,
-            shapes = CodeNoxShapes,
+            typography = MaterialTypography,
+            shapes = MaterialShapes,
             content = content
         )
     }

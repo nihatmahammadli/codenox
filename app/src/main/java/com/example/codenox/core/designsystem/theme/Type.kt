@@ -1,6 +1,7 @@
 package com.example.codenox.core.designsystem.theme
 
-import androidx.compose.material3.Typography
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -21,71 +22,56 @@ val JetBrainsMono = FontFamily(
     Font(R.font.jetbrains_mono_bold, FontWeight.Bold)
 )
 
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = DMSans,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-)
-
-object CodeNoxTextStyles {
+@Immutable
+data class CodeNoxTypography(
     // DM Sans Styles
-    val DMSans10Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 10.sp)
-    val DMSans10Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 10.sp)
-    
-    val DMSans12Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 12.sp)
-    val DMSans12Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 12.sp)
-    val DMSans12Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 12.sp)
-    
-    val DMSans14Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 14.sp)
-    val DMSans14Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 14.sp)
-    val DMSans14Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-
-    val DMSans16Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 16.sp)
-    val DMSans16Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 16.sp)
-    val DMSans16Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-    
-    val DMSans18Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 18.sp)
-    val DMSans18Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 18.sp)
-    val DMSans18Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-    
-    val DMSans20Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 20.sp)
-    val DMSans20Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 20.sp)
-    val DMSans20Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-    
-    val DMSans24Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 24.sp)
-    val DMSans24Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 24.sp)
-    val DMSans24Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 24.sp)
-    
-    val DMSans36Regular = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 36.sp)
-    val DMSans36Medium = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 36.sp)
-    val DMSans36Bold = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+    val dmSans10Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 10.sp),
+    val dmSans10Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 10.sp),
+    val dmSans12Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 12.sp),
+    val dmSans12Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 12.sp),
+    val dmSans12Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 12.sp),
+    val dmSans14Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 14.sp),
+    val dmSans14Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 14.sp),
+    val dmSans14Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 14.sp),
+    val dmSans16Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 16.sp),
+    val dmSans16Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 16.sp),
+    val dmSans16Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 16.sp),
+    val dmSans18Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 18.sp),
+    val dmSans18Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 18.sp),
+    val dmSans18Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 18.sp),
+    val dmSans20Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 20.sp),
+    val dmSans20Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 20.sp),
+    val dmSans20Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 20.sp),
+    val dmSans24Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 24.sp),
+    val dmSans24Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 24.sp),
+    val dmSans24Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 24.sp),
+    val dmSans36Regular: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 36.sp),
+    val dmSans36Medium: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Medium, fontSize = 36.sp),
+    val dmSans36Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 36.sp),
 
     // JetBrains Mono Styles
-    val Mono10Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 10.sp)
-    val Mono10Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 10.sp)
-    
-    val Mono12Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 12.sp)
-    val Mono12Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 12.sp)
-    
-    val Mono14Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 14.sp)
-    val Mono14Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+    val mono10Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 10.sp),
+    val mono10Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 10.sp),
+    val mono12Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 12.sp),
+    val mono12Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 12.sp),
+    val mono14Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 14.sp),
+    val mono14Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 14.sp),
+    val mono16Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 16.sp),
+    val mono16Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 16.sp),
+    val mono18Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 18.sp),
+    val mono18Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 18.sp),
+    val mono20Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 20.sp),
+    val mono20Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 20.sp),
+    val mono24Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 24.sp),
+    val mono24Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 24.sp),
+    val mono36Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 36.sp),
+    val mono36Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+)
 
-    val Mono16Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 16.sp)
-    val Mono16Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-    
-    val Mono18Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 18.sp)
-    val Mono18Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-    
-    val Mono20Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 20.sp)
-    val Mono20Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-    
-    val Mono24Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 24.sp)
-    val Mono24Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 24.sp)
-    
-    val Mono36Regular = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 36.sp)
-    val Mono36Bold = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 36.sp)
-}
+val LocalCodeNoxTypography = staticCompositionLocalOf { CodeNoxTypography() }
+
+// Material 3 Typography mapping
+val MaterialTypography = androidx.compose.material3.Typography(
+    bodyLarge = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Normal, fontSize = 16.sp),
+    titleLarge = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 22.sp)
+)
