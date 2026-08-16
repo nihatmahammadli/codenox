@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.codenox.R
@@ -29,7 +30,8 @@ fun StreakCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-                .glowCardBackground(
+            .height(190.dp)
+            .glowCardBackground(
                 backgroundColor = CodeNoxTheme.colors.surface,
                 glowColor = CodeNoxGold,
                 glowAlpha = 0.14f,
@@ -44,7 +46,8 @@ fun StreakCard(
                 Icon(
                     painter = painterResource(R.drawable.ic_daily_streak),
                     contentDescription = null,
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier.size(28.dp),
+                    tint = Color.Unspecified
                 )
 
                 Spacer(modifier = Modifier.padding(start = 12.dp))

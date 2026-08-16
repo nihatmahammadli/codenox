@@ -30,6 +30,9 @@ fun Modifier.glowCardBackground(
 
         GlowPosition.CenterEnd ->
             Offset(size.width * 0.8f, size.height * 0.5f)
+
+        GlowPosition.BottomStart ->
+            Offset(size.width * 0.2f, size.height * 0.8f)
     }
 
     val glowBrush = Brush.radialGradient(

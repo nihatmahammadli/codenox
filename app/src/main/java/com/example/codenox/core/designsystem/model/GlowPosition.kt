@@ -4,5 +4,6 @@ enum class GlowPosition {
     TopStart,
     TopEnd,
     Center,
-    CenterEnd
+    CenterEnd,
+    BottomStart
 }
