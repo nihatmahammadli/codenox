@@ -50,22 +50,22 @@ data class CodeNoxTypography(
     val dmSans36Bold: TextStyle = TextStyle(fontFamily = DMSans, fontWeight = FontWeight.Bold, fontSize = 36.sp),
 
     // JetBrains Mono Styles
-    val mono10Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 10.sp),
-    val mono10Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 10.sp),
-    val mono12Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 12.sp),
-    val mono12Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 12.sp),
-    val mono14Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 14.sp),
-    val mono14Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 14.sp),
-    val mono16Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 16.sp),
-    val mono16Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 16.sp),
-    val mono18Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 18.sp),
-    val mono18Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 18.sp),
-    val mono20Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 20.sp),
-    val mono20Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 20.sp),
-    val mono24Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 24.sp),
-    val mono24Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 24.sp),
-    val mono36Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 36.sp),
-    val mono36Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 36.sp)
+    val jetBrainsMono10Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 10.sp),
+    val jetBrainsMono10Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 10.sp),
+    val jetBrainsMono12Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 12.sp),
+    val jetBrainsMono12Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 12.sp),
+    val jetBrainsMono14Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 14.sp),
+    val jetBrainsMono14Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 14.sp),
+    val jetBrainsMono16Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 16.sp),
+    val jetBrainsMono16Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 16.sp),
+    val jetBrainsMono18Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 18.sp),
+    val jetBrainsMono18Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 18.sp),
+    val jetBrainsMono20Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 20.sp),
+    val jetBrainsMono20Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 20.sp),
+    val jetBrainsMono24Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 24.sp),
+    val jetBrainsMono24Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 24.sp),
+    val jetBrainsMono36Regular: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Normal, fontSize = 36.sp),
+    val jetBrainsMono36Bold: TextStyle = TextStyle(fontFamily = JetBrainsMono, fontWeight = FontWeight.Bold, fontSize = 36.sp)
 )
 
 val LocalCodeNoxTypography = staticCompositionLocalOf { CodeNoxTypography() }

@@ -1,128 +1,115 @@
 package com.example.codenox.core.designsystem.components
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.example.codenox.R
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
-
-enum class BottomBarTab(
-    @StringRes val titleRes: Int,
-    @DrawableRes val icon: Int
-) {
-    HOME(R.string.bottom_bar_home, R.drawable.ic_home),
-    LEARN(R.string.bottom_bar_learn, R.drawable.ic_learn),
-    TROPHIES(R.string.bottom_bar_trophies, R.drawable.ic_trophies),
-    PROFILE(R.string.bottom_bar_profile, R.drawable.ic_profile)
-}
+import kotlin.math.roundToInt
 
 @Composable
 fun CodeNoxBottomBar(
-    modifier: Modifier = Modifier,
-    selectedTab: BottomBarTab = BottomBarTab.HOME,
-    onTabSelected: (BottomBarTab) -> Unit = {}
+    pagerState: PagerState,
+    onTabSelected: (BottomBarTab) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    val containerColor = CodeNoxTheme.colors.surface
-    val selectedColor = CodeNoxTheme.colors.primary
-    val unselectedColor = CodeNoxTheme.colors.textSecondary
+    val tabs = BottomBarTab.entries
+    val density = LocalDensity.current
+    var barWidth by remember { mutableIntStateOf(0) }
+    
+    val indicatorWidth = if (barWidth > 0) (barWidth / tabs.size) else 0
+    val indicatorPadding = 8.dp
+    
+    val offsetFraction = pagerState.currentPage + pagerState.currentPageOffsetFraction
+    val indicatorOffset = with(density) {
+        (offsetFraction * indicatorWidth).toDp()
+    }
 
     Box(
         modifier = modifier
-            .navigationBarsPadding() // Adds padding to avoid system navigation bar
+            .navigationBarsPadding()
             .padding(horizontal = 16.dp)
-            .padding(bottom = 12.dp, top = 8.dp) // Adjusted padding
+            .padding(bottom = 12.dp, top = 8.dp)
             .height(84.dp)
             .clip(RoundedCornerShape(42.dp))
-            .background(containerColor)
+            .background(CodeNoxTheme.colors.surface)
+            .onGloballyPositioned { barWidth = it.size.width }
     ) {
-        NavigationBar(
-            containerColor = Color.Transparent,
-            tonalElevation = 0.dp,
-            windowInsets = WindowInsets(0, 0, 0, 0),
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            BottomBarTab.entries.forEach { tab ->
-                val isSelected = tab == selectedTab
-                NavigationBarItem(
-                    selected = isSelected,
-                    onClick = { onTabSelected(tab) },
-                    icon = {
-                        Icon(
-                            painter = painterResource(id = tab.icon),
-                            contentDescription = stringResource(tab.titleRes),
-                            modifier = Modifier.size(26.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            text = stringResource(tab.titleRes),
-                            style = CodeNoxTheme.typography.dmSans12Regular
-                        )
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = selectedColor,
-                        selectedTextColor = selectedColor,
-                        indicatorColor = selectedColor.copy(alpha = 0.12f),
-                        unselectedIconColor = unselectedColor,
-                        unselectedTextColor = unselectedColor
-                    )
+        if (barWidth > 0) {
+            Box(
+                modifier = Modifier
+                    .offset { IntOffset(with(density) { indicatorOffset.toPx() }.roundToInt(), 0) }
+                    .width(with(density) { indicatorWidth.toDp() })
+                    .fillMaxHeight()
+                    .padding(indicatorPadding),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .height(48.dp)
+                        .background(CodeNoxTheme.colors.primary.copy(alpha = 0.12f), CircleShape)
                 )
             }
         }
-    }
-}
 
-@Composable
-fun NavigationBottomBar(
-    currentTab: BottomBarTab,
-    modifier: Modifier = Modifier,
-    onNavigateToHome: () -> Unit = {},
-    onNavigateToLearn: () -> Unit = {},
-    onNavigateToTrophies: () -> Unit = {},
-    onNavigateToProfile: () -> Unit = {}
-) {
-    CodeNoxBottomBar(
-        modifier = modifier,
-        selectedTab = currentTab,
-        onTabSelected = { tab ->
-            when (tab) {
-                BottomBarTab.HOME -> onNavigateToHome()
-                BottomBarTab.LEARN -> onNavigateToLearn()
-                BottomBarTab.TROPHIES -> onNavigateToTrophies()
-                BottomBarTab.PROFILE -> onNavigateToProfile()
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            tabs.forEachIndexed { index, tab ->
+                val isSelected = pagerState.currentPage == index
+                val contentColor by animateColorAsState(
+                    targetValue = if (isSelected) CodeNoxTheme.colors.primary else CodeNoxTheme.colors.textSecondary,
+                    label = "color"
+                )
+
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = { onTabSelected(tab) }
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = tab.icon),
+                            contentDescription = stringResource(tab.titleRes),
+                            tint = contentColor,
+                            modifier = Modifier.size(26.dp)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(tab.titleRes),
+                            style = CodeNoxTheme.typography.dmSans12Medium,
+                            color = contentColor
+                        )
+                    }
+                }
             }
         }
-    )
-}
-
-@Preview
-@Composable
-private fun BottomBarPreview() {
-    CodeNoxTheme {
-        CodeNoxBottomBar(
-            selectedTab = BottomBarTab.HOME,
-            onTabSelected = {}
-        )
     }
 }

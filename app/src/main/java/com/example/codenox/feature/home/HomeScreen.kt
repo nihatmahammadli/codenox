@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import com.example.codenox.domain.model.HistoryItem
 import com.example.codenox.domain.model.Lesson
 import com.example.codenox.domain.model.LessonStatus
 import com.example.codenox.domain.model.Module
+import com.example.codenox.feature.home.components.ActiveLessonCard
 import com.example.codenox.feature.home.components.DailyGoalCard
 import com.example.codenox.feature.home.components.HomeHeader
 import com.example.codenox.feature.home.components.JumpBackInSection
@@ -24,6 +26,9 @@ import com.example.codenox.feature.home.components.StreakCard
 
 @Composable
 fun HomeScreen(
+    onLearnClick: () -> Unit = {},
+    onTrophiesClick: () -> Unit = {},
+    onProfileClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -32,6 +37,17 @@ fun HomeScreen(
     val historyItems = listOf(
         HistoryItem(id = "1", title = "Kotlin Syntax Recap", type = "Cheatsheet"),
         HistoryItem(id = "2", title = "Intro to Room", type = "Article", duration = "5 min")
+    )
+
+    val activeLesson = Lesson(
+        id = "2",
+        index = "02",
+        category = "Navigation",
+        title = "Activities and Intents",
+        description = "Learn how to navigate between screens and pass data using explicit and implicit intents in Android.",
+        duration = "15m",
+        xp = 50,
+        status = LessonStatus.ACTIVE
     )
 
     val sampleModule = Module(
@@ -46,16 +62,7 @@ fun HomeScreen(
                 title = "Views & ViewGroups",
                 status = LessonStatus.COMPLETED
             ),
-            Lesson(
-                id = "2",
-                index = "02",
-                category = "Navigation",
-                title = "Activities and Intents",
-                description = "Learn how to navigate between screens and pass data using explicit and implicit intents in Android.",
-                duration = "15m",
-                xp = 50,
-                status = LessonStatus.ACTIVE
-            ),
+            activeLesson,
             Lesson(
                 id = "3",
                 index = "03",
@@ -77,23 +84,31 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .verticalScroll(scrollState),
+                .verticalScroll(scrollState)
+                .padding(bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             HomeHeader(
                 userName = "Nihat Mahammadli",
-                profileImage = com.example.codenox.R.drawable.ic_default_profile
+                profileImage = com.example.codenox.R.drawable.ic_default_profile,
+                onProfileClick = onProfileClick
             )
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                StreakCard(modifier = Modifier.weight(1f))
+                StreakCard(
+                    modifier = Modifier.weight(1f),
+                    onStreakClick = onTrophiesClick
+                )
                 DailyGoalCard(modifier = Modifier.weight(1f))
             }
 
-
+            ActiveLessonCard(
+                lesson = activeLesson,
+                onContinueClick = onLearnClick
+            )
 
             LessonRoadmap(
                 module = sampleModule,

@@ -19,6 +19,7 @@ val TextSecondary = Color(0xFF7A877E)
 
 // Border
 val BorderPrimary = Color(0xFF121614)
+val BorderSecondary = Color(0xFF232925)
 
 @Immutable
 data class CodeNoxColors(
@@ -34,7 +35,8 @@ data class CodeNoxColors(
     val greenAlpha10: Color = CodeNoxGreen.copy(alpha = 0.10f),
     val greenAlpha15: Color = CodeNoxGreen.copy(alpha = 0.15f),
     val goldAlpha10: Color = CodeNoxGold.copy(alpha = 0.10f),
-    val goldAlpha20: Color = CodeNoxGold.copy(alpha = 0.20f)
+    val goldAlpha20: Color = CodeNoxGold.copy(alpha = 0.20f),
+    val borderSecondary: Color = BorderSecondary
 )
 
 val LocalCodeNoxColors = staticCompositionLocalOf { CodeNoxColors() }

@@ -31,7 +31,7 @@ fun JumpBackInSection(
     ) {
         Text(
             text = "JUMP BACK IN",
-            style = CodeNoxTheme.typography.mono18Bold,
+            style = CodeNoxTheme.typography.jetBrainsMono18Bold,
             color = CodeNoxTheme.colors.textSecondary
         )
 
@@ -85,7 +85,7 @@ private fun JumpBackInCard(
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(
                     text = item.title,
-                    style = CodeNoxTheme.typography.mono18Bold,
+                    style = CodeNoxTheme.typography.jetBrainsMono18Bold,
                     color = CodeNoxTheme.colors.textPrimary,
                     maxLines = 1
                 )

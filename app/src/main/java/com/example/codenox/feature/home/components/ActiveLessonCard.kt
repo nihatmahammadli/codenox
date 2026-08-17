@@ -84,7 +84,7 @@ fun ActiveLessonCard(
             // Title
             Text(
                 text = lesson.title,
-                style = CodeNoxTheme.typography.mono24Bold,
+                style = CodeNoxTheme.typography.jetBrainsMono24Bold,
                 color = CodeNoxTheme.colors.textPrimary
             )
 

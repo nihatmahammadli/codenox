@@ -38,7 +38,7 @@ fun LessonRoadmap(
         ) {
             Text(
                 text = module.title.uppercase(),
-                style = CodeNoxTheme.typography.mono18Bold,
+                style = CodeNoxTheme.typography.jetBrainsMono18Bold,
                 color = CodeNoxTheme.colors.textSecondary
             )
             
@@ -167,7 +167,7 @@ private fun CollapsedLessonItem(lesson: Lesson) {
         )
         Text(
             text = lesson.title,
-            style = CodeNoxTheme.typography.mono18Bold,
+            style = CodeNoxTheme.typography.jetBrainsMono18Bold,
             color = if (lesson.status == LessonStatus.LOCKED) 
                         CodeNoxTheme.colors.textSecondary 
                     else 
