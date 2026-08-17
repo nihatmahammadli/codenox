@@ -30,6 +30,8 @@ import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 fun StreakCard(
     onStreakClick: () -> Unit = {},
     modifier: Modifier = Modifier,
+    streakDays: String = "0",
+    milestoneText: String = "Complete a lesson to start your streak"
 ) {
     Box(
         modifier = modifier
@@ -69,7 +71,7 @@ fun StreakCard(
                 horizontalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(
-                    text = "12",
+                    text = streakDays,
                     style = CodeNoxTheme.typography.jetBrainsMono36Bold,
                     color = CodeNoxTheme.colors.textPrimary
                 )
@@ -81,8 +83,8 @@ fun StreakCard(
                 )
             }
             Text(
-                text = "3 days to next\nmilestone",
-                style = CodeNoxTheme.typography.dmSans16Regular,
+                text = milestoneText,
+                style = CodeNoxTheme.typography.dmSans14Regular,
                 color = CodeNoxTheme.colors.textSecondary
             )
         }

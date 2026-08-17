@@ -21,26 +21,25 @@ fun TrophiesScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    // Sample Data
-    val userInfo = UserTrophyInfo(totalXp = "14,250", level = 12, rank = 2)
-    val nextMilestone = Milestone(title = "Compose Architect", currentXp = 750, targetXp = 1000)
+    // Reset Sample Data
+    val userInfo = UserTrophyInfo(totalXp = "0", level = 0, rank = 0)
+    val nextMilestone = Milestone(title = "Getting Started", currentXp = 0, targetXp = 100)
     val badges = listOf(
-        Badge(id = "1"),
-        Badge(id = "2"),
-        Badge(id = "3", isNew = true),
+        Badge(id = "1", isLocked = true),
+        Badge(id = "2", isLocked = true),
+        Badge(id = "3", isLocked = true),
         Badge(id = "4", isLocked = true)
     )
     val leaderboard = listOf(
-        LeaderboardEntry(id = "1", rank = 1, name = "Alex Chen", xp = "16,420"),
-        LeaderboardEntry(id = "2", rank = 2, name = "Nihat M. (You)", xp = "14,250", isCurrentUser = true),
-        LeaderboardEntry(id = "3", rank = 3, name = "Sarah Miller", xp = "13,980")
+        LeaderboardEntry(id = "1", rank = 1, name = "Top Developer", xp = "100"),
+        LeaderboardEntry(id = "2", rank = 2, name = "You", xp = "0", isCurrentUser = true)
     )
     val challenge = Challenge(
         id = "1",
-        title = "Weekend Warrior",
-        description = "Complete 3 lessons this weekend",
-        currentProgress = 1,
-        totalGoal = 3
+        title = "First Lesson",
+        description = "Complete your first lesson to start",
+        currentProgress = 0,
+        totalGoal = 1
     )
 
     CodeNoxBackground(modifier = modifier) {
@@ -48,7 +47,8 @@ fun TrophiesScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .padding(bottom = 24.dp),
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

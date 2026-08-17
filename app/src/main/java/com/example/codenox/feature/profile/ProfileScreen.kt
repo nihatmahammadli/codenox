@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.codenox.R
+import com.example.codenox.core.designsystem.base.BaseScreen
 import com.example.codenox.core.designsystem.components.CodeNoxBackground
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 
@@ -32,24 +33,29 @@ fun ProfileScreen(
     onSettingsClick: () -> Unit = {},
     onLearnClick: () -> Unit = {}
 ) {
-    CodeNoxBackground {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp) // Reduced padding from 24.dp to 16.dp
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
-            ProfileHeader(onSettingsClick = onSettingsClick)
-            Spacer(modifier = Modifier.height(24.dp))
-            ProfileUserCard()
-            Spacer(modifier = Modifier.height(24.dp))
-            StatsRow()
-            Spacer(modifier = Modifier.height(32.dp))
-            LearningProgressSection(onClick = onLearnClick)
-            Spacer(modifier = Modifier.height(32.dp))
-            RecentActivitySection()
-            Spacer(modifier = Modifier.height(32.dp))
+    BaseScreen<ProfileUiState, ProfileViewModel> { uiState, viewModel ->
+        CodeNoxBackground {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp)
+            ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                ProfileHeader(onSettingsClick = onSettingsClick)
+                Spacer(modifier = Modifier.height(24.dp))
+                ProfileUserCard(
+                    fullName = uiState.profile?.fullName,
+                    nickname = uiState.profile?.nickname
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                StatsRow()
+                Spacer(modifier = Modifier.height(32.dp))
+                LearningProgressSection(onClick = onLearnClick)
+                Spacer(modifier = Modifier.height(32.dp))
+                RecentActivitySection()
+                Spacer(modifier = Modifier.height(32.dp))
+            }
         }
     }
 }
@@ -85,7 +91,10 @@ private fun ProfileHeader(onSettingsClick: () -> Unit) {
 }
 
 @Composable
-private fun ProfileUserCard() {
+fun ProfileUserCard(
+    nickname: String?,
+    fullName: String?
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -113,12 +122,12 @@ private fun ProfileUserCard() {
             
             Column {
                 Text(
-                    text = "Nihat Mahammadli",
+                    text = fullName ?: "New Developer",
                     style = CodeNoxTheme.typography.dmSans20Bold,
                     color = Color.White
                 )
                 Text(
-                    text = "@nihat_dev",
+                    text = nickname ?: "@nickname",
                     style = CodeNoxTheme.typography.dmSans14Regular,
                     color = CodeNoxTheme.colors.textSecondary
                 )
@@ -145,14 +154,14 @@ private fun ProfileUserCard() {
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "Level 12 Developer",
+                    text = "Level 0 Beginner",
                     style = CodeNoxTheme.typography.dmSans16Bold,
                     color = Color.White
                 )
             }
             
             Text(
-                text = "750 / 1,000 XP",
+                text = "0 / 100 XP",
                 style = CodeNoxTheme.typography.dmSans12Bold,
                 color = CodeNoxTheme.colors.primary
             )
@@ -161,7 +170,7 @@ private fun ProfileUserCard() {
         Spacer(modifier = Modifier.height(12.dp))
         
         LinearProgressIndicator(
-            progress = { 0.75f },
+            progress = { 0f },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(8.dp)
@@ -180,17 +189,17 @@ private fun StatsRow() {
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         StatCard(
-            value = "8",
+            value = "0",
             label = "Courses Done",
             modifier = Modifier.weight(1f)
         )
         StatCard(
-            value = "24",
+            value = "0",
             label = "Achievements",
             modifier = Modifier.weight(1f)
         )
         StatCard(
-            value = "12",
+            value = "0",
             label = "Day Streak",
             valueColor = CodeNoxTheme.colors.primary,
             modifier = Modifier.weight(1f)
@@ -254,13 +263,13 @@ private fun LearningProgressSection(onClick: () -> Unit) {
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "MODULE 2 • ANDROID PATH",
+                        text = "MODULE 1 • KOTLIN BASICS",
                         style = CodeNoxTheme.typography.dmSans12Bold,
                         color = CodeNoxTheme.colors.primary
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Activities and Intents",
+                        text = "Getting Started",
                         style = CodeNoxTheme.typography.dmSans18Bold,
                         color = Color.White
                     )
@@ -272,7 +281,7 @@ private fun LearningProgressSection(onClick: () -> Unit) {
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
-                        text = "45%",
+                        text = "0%",
                         style = CodeNoxTheme.typography.dmSans12Bold,
                         color = CodeNoxTheme.colors.primary
                     )
@@ -282,7 +291,7 @@ private fun LearningProgressSection(onClick: () -> Unit) {
             Spacer(modifier = Modifier.height(20.dp))
             
             LinearProgressIndicator(
-                progress = { 0.45f },
+                progress = { 0f },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(8.dp)
@@ -295,7 +304,7 @@ private fun LearningProgressSection(onClick: () -> Unit) {
             Spacer(modifier = Modifier.height(16.dp))
             
             Text(
-                text = "4 of 12 lessons completed in this path.",
+                text = "0 of 10 lessons completed in this path.",
                 style = CodeNoxTheme.typography.dmSans12Regular,
                 color = CodeNoxTheme.colors.textSecondary
             )
@@ -314,82 +323,17 @@ private fun RecentActivitySection() {
         )
         Spacer(modifier = Modifier.height(16.dp))
         
-        ActivityItem(
-            title = "Views & ViewGroups",
-            subtitle = "Completed the UI Basics introductio...",
-            time = "1d ago",
-            icon = R.drawable.ic_active_lesson,
-            iconColor = CodeNoxTheme.colors.primary
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        ActivityItem(
-            title = "Double Agent Badge",
-            subtitle = "Linked external data to Intents",
-            time = "2d ago",
-            icon = R.drawable.ic_trophies,
-            iconColor = CodeNoxTheme.colors.secondary
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        ActivityItem(
-            title = "12-Day Streak Achieved",
-            subtitle = "Keep coding to hit next week's goal",
-            time = "3d ago",
-            icon = R.drawable.ic_daily_streak,
-            iconColor = CodeNoxTheme.colors.primary
-        )
-    }
-}
-
-@Composable
-private fun ActivityItem(
-    title: String,
-    subtitle: String,
-    time: String,
-    icon: Int,
-    iconColor: Color
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFF121614), RoundedCornerShape(20.dp))
-            .border(1.dp, Color.White.copy(alpha = 0.05f), RoundedCornerShape(20.dp))
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
         Box(
             modifier = Modifier
-                .size(48.dp)
-                .background(iconColor.copy(alpha = 0.1f), CircleShape),
+                .fillMaxWidth()
+                .padding(vertical = 24.dp),
             contentAlignment = Alignment.Center
         ) {
-            Icon(
-                painter = painterResource(id = icon),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                tint = iconColor
+            Text(
+                text = "No recent activity yet.",
+                style = CodeNoxTheme.typography.dmSans14Regular,
+                color = CodeNoxTheme.colors.textSecondary.copy(alpha = 0.6f)
             )
         }
-        
-        Spacer(modifier = Modifier.width(16.dp))
-        
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = title,
-                style = CodeNoxTheme.typography.dmSans16Bold,
-                color = Color.White
-            )
-            Text(
-                text = subtitle,
-                style = CodeNoxTheme.typography.dmSans12Regular,
-                color = CodeNoxTheme.colors.textSecondary,
-                maxLines = 1
-            )
-        }
-        
-        Text(
-            text = time,
-            style = CodeNoxTheme.typography.dmSans12Regular,
-            color = CodeNoxTheme.colors.textSecondary
-        )
     }
 }

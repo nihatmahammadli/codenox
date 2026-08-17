@@ -33,48 +33,31 @@ fun HomeScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    // Sample Data
-    val historyItems = listOf(
-        HistoryItem(id = "1", title = "Kotlin Syntax Recap", type = "Cheatsheet"),
-        HistoryItem(id = "2", title = "Intro to Room", type = "Article", duration = "5 min")
-    )
+    // Reset Sample Data
+    val historyItems = emptyList<HistoryItem>()
 
     val activeLesson = Lesson(
-        id = "2",
-        index = "02",
-        category = "Navigation",
-        title = "Activities and Intents",
-        description = "Learn how to navigate between screens and pass data using explicit and implicit intents in Android.",
-        duration = "15m",
-        xp = 50,
+        id = "1",
+        index = "01",
+        category = "Fundamentals",
+        title = "Getting Started",
+        description = "Learn the basics of Android development and set up your environment.",
+        duration = "10m",
+        xp = 20,
         status = LessonStatus.ACTIVE
     )
 
     val sampleModule = Module(
         id = "1",
-        title = "Android Path",
-        moduleNumber = 2,
+        title = "Kotlin Basics",
+        moduleNumber = 1,
         lessons = listOf(
-            Lesson(
-                id = "1",
-                index = "01",
-                category = "UI Basics",
-                title = "Views & ViewGroups",
-                status = LessonStatus.COMPLETED
-            ),
             activeLesson,
             Lesson(
-                id = "3",
-                index = "03",
-                category = "Lifecycle",
-                title = "Activity Lifecycles",
-                status = LessonStatus.LOCKED
-            ),
-            Lesson(
-                id = "4",
-                index = "04",
-                category = "UI Polish",
-                title = "Material 3 in Compose",
+                id = "2",
+                index = "02",
+                category = "Fundamentals",
+                title = "Variables & Types",
                 status = LessonStatus.LOCKED
             )
         )
@@ -85,11 +68,12 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .padding(bottom = 24.dp),
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             HomeHeader(
-                userName = "Nihat Mahammadli",
+                userName = "New Developer",
                 profileImage = com.example.codenox.R.drawable.ic_default_profile,
                 onProfileClick = onProfileClick
             )

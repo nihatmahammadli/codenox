@@ -20,8 +20,8 @@ import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 @Composable
 fun DailyGoalCard(
     modifier: Modifier = Modifier,
-    goalTime: String = "45/60m",
-    progress: Float = 0.75f
+    goalTime: String = "0/60m",
+    progress: Float = 0f
 ) {
     Box(
         modifier = modifier

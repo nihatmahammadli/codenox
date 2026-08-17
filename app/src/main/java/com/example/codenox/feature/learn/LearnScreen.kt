@@ -25,24 +25,24 @@ fun LearnScreen(
     var searchQuery by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("All") }
 
-    // Sample Data
+    // Reset Sample Data
     val continueLearningData = ContinueLearning(
-        lessonNumber = "2.4",
-        title = "Retrofit: API Handling",
-        description = "Master network requests and JSON parsing with the industry-standard library.",
-        duration = "22m",
-        level = "Intermediate"
+        lessonNumber = "1.1",
+        title = "Getting Started",
+        description = "Your first step into Android development. Learn about the tools and basic structure.",
+        duration = "10m",
+        level = "Beginner"
     )
 
     val learningPaths = listOf(
-        LearningPath(id = "1", title = "Build Your First App", totalLessons = 12, completedLessons = 4),
-        LearningPath(id = "2", title = "Master Jetpack Compose", totalLessons = 8, completedLessons = 0, level = "Beginner")
+        LearningPath(id = "1", title = "Build Your First App", totalLessons = 12, completedLessons = 0, level = "Beginner"),
+        LearningPath(id = "2", title = "Kotlin Fundamentals", totalLessons = 10, completedLessons = 0, level = "Beginner")
     )
 
     val popularLessons = listOf(
-        PopularLesson(id = "1", title = "Dependency Injection with Hilt", level = "Intermediate", duration = "45m", xp = 120),
-        PopularLesson(id = "2", title = "Kotlin Coroutines Deep Dive", level = "Advanced", duration = "38m", xp = 150),
-        PopularLesson(id = "3", title = "Navigation Component", level = "Beginner", duration = "25m", xp = 80)
+        PopularLesson(id = "1", title = "Variables & Types", level = "Beginner", duration = "15m", xp = 30),
+        PopularLesson(id = "2", title = "Control Flow", level = "Beginner", duration = "20m", xp = 40),
+        PopularLesson(id = "3", title = "Functions Basics", level = "Beginner", duration = "18m", xp = 35)
     )
 
     CodeNoxBackground(modifier = modifier) {
@@ -50,7 +50,8 @@ fun LearnScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
-                .padding(bottom = 24.dp),
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             LearnHeader()

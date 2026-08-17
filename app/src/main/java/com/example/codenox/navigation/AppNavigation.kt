@@ -1,66 +1,40 @@
-package com.example.codenox.core.navigation
+package com.example.codenox.navigation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.codenox.core.designsystem.components.BottomBarTab
 import com.example.codenox.core.designsystem.components.CodeNoxBottomBar
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 import com.example.codenox.feature.home.HomeScreen
 import com.example.codenox.feature.learn.LearnScreen
 import com.example.codenox.feature.profile.ProfileScreen
-import com.example.codenox.feature.profile.SettingsScreen
 import com.example.codenox.feature.trophies.TrophiesScreen
-import com.example.codenox.feature.welcome.OnboardingScreen
-import com.example.codenox.feature.welcome.SplashScreen
 import kotlinx.coroutines.launch
 
 @Composable
 fun AppNavigation() {
-    var currentScreen by rememberSaveable { mutableStateOf("splash") }
+    val navController = rememberNavController()
+    val navigationManager = rememberNavigationManager(navController)
 
-    when (currentScreen) {
-        "splash" -> {
-            SplashScreen(onSplashFinished = { currentScreen = "onboarding" })
-        }
-        "onboarding" -> {
-            OnboardingScreen(onFinish = { data ->
-                // Here you can send 'data' to your backend/repository
-                currentScreen = "main" 
-            })
-        }
-        "settings" -> {
-            SettingsScreen(
-                onBackClick = { currentScreen = "main_profile" },
-                onLogoutClick = { currentScreen = "onboarding" }
-            )
-        }
-        "main_profile" -> {
-            MainScreen(
-                onSettingsClick = { currentScreen = "settings" },
-                initialTab = BottomBarTab.PROFILE
-            )
-        }
-        else -> {
-            MainScreen(onSettingsClick = { currentScreen = "settings" })
-        }
+    CompositionLocalProvider(LocalNavigationManager provides navigationManager) {
+        NavigationGraph(navController = navController)
     }
 }
 
 @Composable
 fun MainScreen(
     onSettingsClick: () -> Unit,
-    initialTab: BottomBarTab = BottomBarTab.HOME
+    initialTab: BottomBarTab = BottomBarTab.HOME,
+    onBackToHome: () -> Unit
 ) {
     val tabs = BottomBarTab.entries
     val pagerState = rememberPagerState(
@@ -72,6 +46,13 @@ fun MainScreen(
     val navigateToTab: (BottomBarTab) -> Unit = { tab ->
         scope.launch {
             pagerState.animateScrollToPage(tab.ordinal)
+        }
+    }
+
+    // Handle system back button inside MainScreen
+    BackHandler(enabled = pagerState.currentPage != BottomBarTab.HOME.ordinal) {
+        if (pagerState.currentPage != BottomBarTab.HOME.ordinal) {
+            navigateToTab(BottomBarTab.HOME)
         }
     }
 
@@ -99,6 +80,7 @@ fun MainScreen(
                     onTrophiesClick = { navigateToTab(BottomBarTab.TROPHIES) },
                     onProfileClick = { navigateToTab(BottomBarTab.PROFILE) }
                 )
+
                 BottomBarTab.LEARN -> LearnScreen()
                 BottomBarTab.TROPHIES -> TrophiesScreen()
                 BottomBarTab.PROFILE -> ProfileScreen(

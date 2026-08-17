@@ -18,10 +18,6 @@ import com.example.codenox.feature.welcome.steps.PersonalizeStep
 import com.example.codenox.feature.welcome.steps.SkillLevelStep
 import kotlinx.coroutines.launch
 
-/**
- * Data class to hold onboarding state. 
- * This makes it easy to pass to a ViewModel or Backend later.
- */
 data class OnboardingData(
     val name: String = "",
     val nickname: String = "",
