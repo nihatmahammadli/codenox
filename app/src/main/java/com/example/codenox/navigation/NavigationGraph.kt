@@ -5,9 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.codenox.feature.profile.SettingsScreen
-import com.example.codenox.feature.welcome.OnboardingScreen
-import com.example.codenox.feature.welcome.SplashScreen
+import com.example.codenox.feature.auth.presentation.onboarding.OnboardingScreen
+import com.example.codenox.feature.main.presentation.settings.SettingsScreen
+import com.example.codenox.feature.auth.presentation.splash.SplashScreen
 
 @Composable
 fun NavigationGraph(
@@ -29,7 +29,7 @@ fun NavigationGraph(
         }
 
         composable(route = Screen.Onboarding.route) {
-            OnboardingScreen(onFinish = {
+            OnboardingScreen(onFinish = { data ->
                 navController.navigate(Screen.Main.route) {
                     popUpTo(Screen.Onboarding.route) { inclusive = true }
                 }

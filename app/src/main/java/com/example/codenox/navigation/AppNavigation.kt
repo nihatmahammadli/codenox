@@ -14,10 +14,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.codenox.core.designsystem.components.BottomBarTab
 import com.example.codenox.core.designsystem.components.CodeNoxBottomBar
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
-import com.example.codenox.feature.home.HomeScreen
-import com.example.codenox.feature.learn.LearnScreen
-import com.example.codenox.feature.profile.ProfileScreen
-import com.example.codenox.feature.trophies.TrophiesScreen
+import com.example.codenox.feature.main.presentation.home.HomeScreen
+import com.example.codenox.feature.main.presentation.learn.LearnScreen
+import com.example.codenox.feature.main.presentation.profile.ProfileScreen
+import com.example.codenox.feature.main.presentation.trophies.TrophiesScreen
 import kotlinx.coroutines.launch
 
 @Composable

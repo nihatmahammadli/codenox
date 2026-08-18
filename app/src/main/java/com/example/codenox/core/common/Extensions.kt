@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.codenox.core.designsystem.model.GlowPosition
 
-// Extension functions
 
 fun Modifier.glowCardBackground(
     backgroundColor: Color,
