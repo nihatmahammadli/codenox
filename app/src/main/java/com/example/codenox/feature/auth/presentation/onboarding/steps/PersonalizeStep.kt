@@ -41,6 +41,7 @@ fun PersonalizeStep(
             lineHeight = 44.sp
         )
         Spacer(modifier = Modifier.height(16.dp))
+
         Text(
             text = "We'll use this to customize your learning journey and set up your public developer profile.",
             style = CodeNoxTheme.typography.dmSans14Regular,
@@ -61,8 +62,9 @@ fun PersonalizeStep(
         CodeNoxTextField(
             value = nickname,
             onValueChange = onNicknameChange,
-            label = "Nickname",
+            label = "Mr.Robot",
             placeholder = "nihat"
         )
+
     }
 }
