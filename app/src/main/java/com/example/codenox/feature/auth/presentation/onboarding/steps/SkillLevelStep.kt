@@ -26,11 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.codenox.R
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
+import com.example.codenox.domain.model.ExperienceLevel
+import com.example.codenox.feature.auth.presentation.onboarding.OnboardingAction
+import com.example.codenox.feature.auth.presentation.onboarding.OnboardingUiState
 
 @Composable
 fun SkillLevelStep(
-    selectedLevel: Int,
-    onLevelSelected: (Int) -> Unit
+    state: OnboardingUiState,
+    onAction: (OnboardingAction) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -62,8 +65,10 @@ fun SkillLevelStep(
             title = "Beginner",
             description = "Just starting out with coding or mobile development",
             icon = R.drawable.ic_star,
-            isSelected = selectedLevel == 0,
-            onClick = { onLevelSelected(0) }
+            isSelected = state.experienceLevel == ExperienceLevel.BEGINNER,
+            onClick = { onAction(
+                OnboardingAction.ExperienceLevelSelected(ExperienceLevel.BEGINNER)
+            ) }
         )
         
         Spacer(modifier = Modifier.height(16.dp))
@@ -72,8 +77,10 @@ fun SkillLevelStep(
             title = "Intermediate",
             description = "Some experience with Kotlin and basic Android concepts",
             icon = R.drawable.ic_learn,
-            isSelected = selectedLevel == 1,
-            onClick = { onLevelSelected(1) }
+            isSelected = state.experienceLevel == ExperienceLevel.INTERMEDIATE,
+            onClick = { onAction (
+                OnboardingAction.ExperienceLevelSelected(ExperienceLevel.BEGINNER)
+            ) }
         )
         
         Spacer(modifier = Modifier.height(16.dp))
@@ -82,8 +89,12 @@ fun SkillLevelStep(
             title = "Advanced",
             description = "Experienced engineer looking to master architecture & compose",
             icon = R.drawable.ic_trophies,
-            isSelected = selectedLevel == 2,
-            onClick = { onLevelSelected(2) }
+            isSelected = state.experienceLevel == ExperienceLevel.ADVANCED,
+            onClick = {
+                onAction (
+                    OnboardingAction.ExperienceLevelSelected(ExperienceLevel.ADVANCED)
+                )
+            }
         )
     }
 }

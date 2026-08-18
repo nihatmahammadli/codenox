@@ -8,5 +8,7 @@ data class Profile(
     val id: String,
     val nickname: String,
     @SerialName("full_name")
-    val fullName: String
+    val fullName: String,
+    @SerialName("experience_level")
+    val experienceLevel: ExperienceLevel
 )

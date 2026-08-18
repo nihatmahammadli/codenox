@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingScreen(
-    onFinish: (OnboardingData) -> Unit
+    onFinish: () -> Unit
 ) {
     BaseScreen<OnboardingUiState, OnboardingViewModel> { uiState, viewModel ->
         val stepCount = 2
@@ -32,7 +32,23 @@ fun OnboardingScreen(
         val scope = rememberCoroutineScope()
 
         LaunchedEffect(pagerState.currentPage) {
-            viewModel.onPageChanged(pagerState.currentPage)
+            viewModel.onAction(
+                OnboardingAction.PageChanged(pagerState.currentPage)
+            )
+        }
+
+        LaunchedEffect(Unit) {
+            viewModel.effect.collect { effect ->
+
+                when(effect){
+                    OnboardingEffect.NavigateToHome -> {
+                        onFinish()
+                    }
+                    is OnboardingEffect.ShowError -> {
+                        // Snackbar əlavə edə bilərik
+                    }
+                }
+            }
         }
 
         CodeNoxBackground {
@@ -58,29 +74,23 @@ fun OnboardingScreen(
                     userScrollEnabled = false
                 ) { page ->
                     when (page) {
-                        0 -> PersonalizeStep(
-                            name = uiState.name,
-                            onNameChange = viewModel::onNameChange,
-                            nickname = uiState.nickname,
-                            onNicknameChange = viewModel::onNicknameChange
-                        )
-                        1 -> SkillLevelStep(
-                            selectedLevel = uiState.selectedLevel ?: -1,
-                            onLevelSelected = viewModel::onLevelSelected
-                        )
+                        0 -> PersonalizeStep(state = uiState, onAction = viewModel::onAction)
+                        1 -> SkillLevelStep(state = uiState, onAction = viewModel::onAction)
                     }
                 }
 
                 CodeNoxButton(
                     text = if (pagerState.currentPage == stepCount - 1) "Start Learning" else "Continue",
-                    enabled = uiState.isButtonEnabled,
+                    enabled = uiState.isButtonEnabled && !uiState.isLoading,
                     onClick = {
                         if (pagerState.currentPage < stepCount - 1) {
                             scope.launch {
                                 pagerState.animateScrollToPage(pagerState.currentPage + 1)
                             }
                         } else {
-                            onFinish(viewModel.getFinalData())
+                            viewModel.onAction(
+                                OnboardingAction.CompleteOnboarding
+                            )
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),

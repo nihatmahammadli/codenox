@@ -30,11 +30,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.codenox.R
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
+import com.example.codenox.feature.main.presentation.profile.ProfileUiState
 
 @Composable
 fun ProfileUserCard(
-    nickname: String?,
-    fullName: String?
+    state: ProfileUiState
 ) {
     Column(
         modifier = Modifier
@@ -63,12 +63,13 @@ fun ProfileUserCard(
 
             Column {
                 Text(
-                    text = fullName ?: "New Developer",
+                    text = state.profile?.fullName ?: "New Developer",
                     style = CodeNoxTheme.typography.dmSans20Bold,
                     color = Color.White
                 )
+
                 Text(
-                    text = nickname ?: "@nickname",
+                    text = state.profile?.nickname?.let { "@$it" } ?: "@nickname",
                     style = CodeNoxTheme.typography.dmSans14Regular,
                     color = CodeNoxTheme.colors.textSecondary
                 )

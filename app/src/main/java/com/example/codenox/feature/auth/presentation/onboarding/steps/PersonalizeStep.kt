@@ -14,13 +14,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.codenox.core.designsystem.components.CodeNoxTextField
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
+import com.example.codenox.feature.auth.presentation.onboarding.OnboardingAction
+import com.example.codenox.feature.auth.presentation.onboarding.OnboardingUiState
 
 @Composable
 fun PersonalizeStep(
-    name: String,
-    onNameChange: (String) -> Unit,
-    nickname: String,
-    onNicknameChange: (String) -> Unit
+    state: OnboardingUiState,
+    onAction: (OnboardingAction) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -51,19 +51,23 @@ fun PersonalizeStep(
         Spacer(modifier = Modifier.height(48.dp))
         
         CodeNoxTextField(
-            value = name,
-            onValueChange = onNameChange,
+            value = state.fullName,
+            onValueChange = {
+                onAction(OnboardingAction.FullNameChanged(it))
+            },
             label = "Your Name",
-            placeholder = "Nihat Mahammadli"
+            placeholder = "Your Full Name here"
         )
         
         Spacer(modifier = Modifier.height(24.dp))
         
         CodeNoxTextField(
-            value = nickname,
-            onValueChange = onNicknameChange,
-            label = "Mr.Robot",
-            placeholder = "nihat"
+            value = state.nickname,
+            onValueChange = {
+                onAction(OnboardingAction.NickNameChanged(it))
+            },
+            label = "@nickname",
+            placeholder = "Nickname here"
         )
 
     }

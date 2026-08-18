@@ -30,10 +30,7 @@ fun ProfileScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 ProfileHeader(onSettingsClick = onSettingsClick)
                 Spacer(modifier = Modifier.height(24.dp))
-                ProfileUserCard(
-                    fullName = uiState.profile?.fullName,
-                    nickname = uiState.profile?.nickname
-                )
+                ProfileUserCard(state = uiState)
                 Spacer(modifier = Modifier.height(24.dp))
                 StatsRow()
                 Spacer(modifier = Modifier.height(32.dp))
