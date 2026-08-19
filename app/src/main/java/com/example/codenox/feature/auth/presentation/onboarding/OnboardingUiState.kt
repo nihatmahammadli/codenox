@@ -7,9 +7,5 @@ data class OnboardingUiState(
     val fullName: String = "",
     val nickname: String = "",
     val experienceLevel: ExperienceLevel? = null,
-    val isLoading: Boolean = false,
-    val fullNameError: String? = null,
-    val nicknameError: String? = null,
-    val errorMessage: String? = null,
     val isButtonEnabled: Boolean = false
 )

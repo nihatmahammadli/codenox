@@ -26,7 +26,6 @@ class OnboardingViewModel @Inject constructor(
             is OnboardingAction.FullNameChanged -> {
                 updateState { it.copy(
                     fullName = action.value,
-                    fullNameError = null
                 ) }
                 updateButtonState()
             }
@@ -34,7 +33,6 @@ class OnboardingViewModel @Inject constructor(
             is OnboardingAction.NicknameChanged -> {
                 updateState { it.copy(
                     nickname = action.value,
-                    nicknameError = null
                 ) }
                 updateButtonState()
             }
@@ -58,61 +56,30 @@ class OnboardingViewModel @Inject constructor(
         }
     }
     private fun updateButtonState() {
-
-        val state = uiState.value
-
-        val enabled =
-            when (state.currentStep) {
-
-                0 -> {
-                    state.fullName.trim().length >= 2 &&
-                            state.nickname.trim().length >= 3
-                }
-
-                1 -> {
-                    state.experienceLevel != null
-                }
-
-                else -> false
-            }
-
-        updateState {
-            it.copy(
-                isButtonEnabled = enabled
-            )
+        val state = currentState
+        val enabled = when (state.currentStep) {
+            0 -> state.fullName.trim().length >= 2 && state.nickname.trim().length >= 3
+            1 -> state.experienceLevel != null
+            else -> false
         }
+        updateState { it.copy(isButtonEnabled = enabled) }
     }
 
 
-    private fun completeOnboarding(){
-        val currentState = uiState.value
+    private fun completeOnboarding() {
+        val state = currentState
+        val level = state.experienceLevel ?: return
 
-        val level = currentState.experienceLevel ?: return
-
-        viewModelScope.launch {
-            updateState {
-                it.copy(
-                    isLoading = true,
-                    errorMessage = null
-                )
-            }
-            runCatching {
+        launchWithLoading {
+            try {
                 profileRepository.createProfile(
-                    nickname = currentState.nickname.trim(),
-                    fullName = currentState.fullName.trim(),
+                    nickname = state.nickname.trim(),
+                    fullName = state.fullName.trim(),
                     experienceLevel = level
                 )
-            }.onSuccess {
-                updateState {
-                    it.copy(isLoading = false)
-                }
-            }.onFailure { throwable ->
-                updateState {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = throwable.message ?: "Something went wrong",
-                    )
-                }
+                _effect.send(OnboardingEffect.NavigateToHome)
+            } catch (e: Exception) {
+                showErrorMessage(e.message ?: "Profil yaradılarkən xəta baş verdi")
             }
         }
     }

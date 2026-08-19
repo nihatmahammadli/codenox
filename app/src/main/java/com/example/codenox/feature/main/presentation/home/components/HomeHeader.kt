@@ -18,14 +18,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
+import com.example.codenox.feature.main.presentation.home.HomeUiState
 
 @Composable
 fun HomeHeader(
     modifier: Modifier = Modifier,
     defaultTitle: String = "Welcome",
-    userName: String,
+    onProfileClick: () -> Unit = {},
     profileImage: Int,
-    onProfileClick: () -> Unit = {}
+    fullName: String
 ) {
     Row(
         modifier = modifier
@@ -43,7 +44,7 @@ fun HomeHeader(
             )
             Spacer(modifier = Modifier.padding(top = 5.2.dp))
             Text(
-                text = userName,
+                text = fullName,
                 color = CodeNoxTheme.colors.textPrimary,
                 style = CodeNoxTheme.typography.jetBrainsMono24Bold
             )

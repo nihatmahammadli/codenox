@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.codenox.R
+import com.example.codenox.core.designsystem.base.BaseScreen
 import com.example.codenox.core.designsystem.components.CodeNoxBackground
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 import com.example.codenox.domain.model.HistoryItem
@@ -62,47 +63,49 @@ fun HomeScreen(
             )
         )
     )
+    BaseScreen<HomeUiState,HomeViewModel>() { uiState, viewModel ->
 
-    CodeNoxBackground(modifier = modifier) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(scrollState)
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            HomeHeader(
-                userName = "New Developer",
-                profileImage = R.drawable.ic_default_profile,
-                onProfileClick = onProfileClick
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+        CodeNoxBackground(modifier = modifier) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(scrollState)
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp, bottom = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
-                StreakCard(
-                    modifier = Modifier.weight(1f),
-                    onStreakClick = onTrophiesClick
+                HomeHeader(
+                    fullName = uiState.profile?.fullName ?: "New Developer",
+                    profileImage = R.drawable.ic_default_profile,
+                    onProfileClick = onProfileClick
                 )
-                DailyGoalCard(modifier = Modifier.weight(1f))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    StreakCard(
+                        modifier = Modifier.weight(1f),
+                        onStreakClick = onTrophiesClick
+                    )
+                    DailyGoalCard(modifier = Modifier.weight(1f))
+                }
+
+                ActiveLessonCard(
+                    lesson = activeLesson,
+                    onContinueClick = onLearnClick
+                )
+
+                LessonRoadmap(
+                    module = sampleModule,
+                    onLessonClick = { /* Handle click */ }
+                )
+
+                JumpBackInSection(
+                    historyItems = historyItems,
+                    onItemClick = { /* Handle click */ }
+                )
             }
-
-            ActiveLessonCard(
-                lesson = activeLesson,
-                onContinueClick = onLearnClick
-            )
-
-            LessonRoadmap(
-                module = sampleModule,
-                onLessonClick = { /* Handle click */ }
-            )
-
-            JumpBackInSection(
-                historyItems = historyItems,
-                onItemClick = { /* Handle click */ }
-            )
         }
     }
 }

@@ -64,7 +64,7 @@ fun PersonalizeStep(
         CodeNoxTextField(
             value = state.nickname,
             onValueChange = {
-                onAction(OnboardingAction.NickNameChanged(it))
+                onAction(OnboardingAction.NicknameChanged(it))
             },
             label = "@nickname",
             placeholder = "Nickname here"

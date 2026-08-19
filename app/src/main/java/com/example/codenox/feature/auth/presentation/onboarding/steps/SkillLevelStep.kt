@@ -67,7 +67,7 @@ fun SkillLevelStep(
             icon = R.drawable.ic_star,
             isSelected = state.experienceLevel == ExperienceLevel.BEGINNER,
             onClick = { onAction(
-                OnboardingAction.ExperienceLevelSelected(ExperienceLevel.BEGINNER)
+                OnboardingAction.LevelSelected(ExperienceLevel.BEGINNER)
             ) }
         )
         
@@ -79,7 +79,7 @@ fun SkillLevelStep(
             icon = R.drawable.ic_learn,
             isSelected = state.experienceLevel == ExperienceLevel.INTERMEDIATE,
             onClick = { onAction (
-                OnboardingAction.ExperienceLevelSelected(ExperienceLevel.BEGINNER)
+                OnboardingAction.LevelSelected(ExperienceLevel.INTERMEDIATE)
             ) }
         )
         
@@ -92,7 +92,7 @@ fun SkillLevelStep(
             isSelected = state.experienceLevel == ExperienceLevel.ADVANCED,
             onClick = {
                 onAction (
-                    OnboardingAction.ExperienceLevelSelected(ExperienceLevel.ADVANCED)
+                    OnboardingAction.LevelSelected(ExperienceLevel.ADVANCED)
                 )
             }
         )

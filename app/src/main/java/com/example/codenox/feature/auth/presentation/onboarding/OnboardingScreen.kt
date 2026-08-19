@@ -81,7 +81,7 @@ fun OnboardingScreen(
 
                 CodeNoxButton(
                     text = if (pagerState.currentPage == stepCount - 1) "Start Learning" else "Continue",
-                    enabled = uiState.isButtonEnabled && !uiState.isLoading,
+                    enabled = uiState.isButtonEnabled,
                     onClick = {
                         if (pagerState.currentPage < stepCount - 1) {
                             scope.launch {

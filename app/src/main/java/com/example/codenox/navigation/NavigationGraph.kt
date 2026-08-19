@@ -29,7 +29,7 @@ fun NavigationGraph(
         }
 
         composable(route = Screen.Onboarding.route) {
-            OnboardingScreen(onFinish = { data ->
+            OnboardingScreen(onFinish = {
                 navController.navigate(Screen.Main.route) {
                     popUpTo(Screen.Onboarding.route) { inclusive = true }
                 }
