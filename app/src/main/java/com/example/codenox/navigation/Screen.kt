@@ -9,6 +9,9 @@ sealed class Screen(val route: String) {
     data object Trophies : Screen("trophies")
     data object Profile : Screen("profile")
     data object Settings : Screen("settings")
+    data object AddEmail:  Screen("addEmail")
+    data object EditName : Screen("edit_name")
+    data object DailyGoal : Screen("daily_goal")
     
     // Example for parameterized routes
     data class Detail(val id: String) : Screen("detail/$id") {

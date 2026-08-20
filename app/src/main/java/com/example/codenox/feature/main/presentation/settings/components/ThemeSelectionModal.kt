@@ -1,0 +1,148 @@
+package com.example.codenox.feature.main.presentation.settings.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import com.example.codenox.R
+import com.example.codenox.core.designsystem.components.CodeNoxButton
+import com.example.codenox.core.designsystem.theme.CodeNoxTheme
+import com.example.codenox.feature.main.presentation.settings.ThemeType
+
+@Composable
+fun ThemeSelectionModal(
+    currentTheme: ThemeType,
+    onDismiss: () -> Unit,
+    onThemeApplied: (ThemeType) -> Unit
+) {
+    var selectedTheme by remember { mutableStateOf(currentTheme) }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF121614), RoundedCornerShape(24.dp))
+                .border(1.dp, Color.White.copy(alpha = 0.05f), RoundedCornerShape(24.dp))
+                .padding(24.dp)
+        ) {
+            Text(
+                text = "Theme",
+                style = CodeNoxTheme.typography.dmSans18Bold,
+                color = Color.White
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                ThemeOptionItem(
+                    label = "Light",
+                    icon = R.drawable.ic_daily_streak, // Replace with sun icon if available
+                    isSelected = selectedTheme == ThemeType.LIGHT,
+                    modifier = Modifier.weight(1f),
+                    onClick = { selectedTheme = ThemeType.LIGHT }
+                )
+                ThemeOptionItem(
+                    label = "Dark",
+                    icon = R.drawable.ic_active_lesson, // Replace with moon icon if available
+                    isSelected = selectedTheme == ThemeType.DARK,
+                    modifier = Modifier.weight(1f),
+                    onClick = { selectedTheme = ThemeType.DARK }
+                )
+                ThemeOptionItem(
+                    label = "System",
+                    icon = R.drawable.ic_settings, // Replace with system icon if available
+                    isSelected = selectedTheme == ThemeType.SYSTEM,
+                    modifier = Modifier.weight(1f),
+                    onClick = { selectedTheme = ThemeType.SYSTEM }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Cancel",
+                    style = CodeNoxTheme.typography.dmSans16Bold,
+                    color = CodeNoxTheme.colors.textSecondary,
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable(onClick = onDismiss)
+                        .padding(vertical = 12.dp),
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
+
+                CodeNoxButton(
+                    text = "Apply",
+                    onClick = { onThemeApplied(selectedTheme) },
+                    modifier = Modifier.weight(1f),
+                    trailingIcon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_arrow_right),
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = Color.Black
+                        )
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ThemeOptionItem(
+    label: String,
+    icon: Int,
+    isSelected: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = modifier
+            .height(80.dp)
+            .background(
+                color = if (isSelected) CodeNoxTheme.colors.primary.copy(alpha = 0.05f) else Color.Transparent,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = if (isSelected) CodeNoxTheme.colors.primary else Color.White.copy(alpha = 0.05f),
+                shape = RoundedCornerShape(12.dp)
+            )
+            .clickable(onClick = onClick)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = null,
+            modifier = Modifier.size(20.dp),
+            tint = if (isSelected) CodeNoxTheme.colors.primary else CodeNoxTheme.colors.textSecondary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = label,
+            style = CodeNoxTheme.typography.dmSans12Medium,
+            color = if (isSelected) Color.White else CodeNoxTheme.colors.textSecondary
+        )
+    }
+}

@@ -19,11 +19,9 @@ class SettingsViewModel @Inject constructor(
         loadProfileInfo()
     }
 
-     fun loadProfileInfo(){
+    fun loadProfileInfo(){
         viewModelScope.launch {
-            updateState {
-                it.copy(isLoading = false)
-            }
+            updateState { it.copy(isLoading = true) }
 
             runCatching {
                 profileRepository.getCurrentProfile()
@@ -43,6 +41,31 @@ class SettingsViewModel @Inject constructor(
                 }
             }
         }
+    }
 
+    fun showThemeModal() {
+        updateState { it.copy(isThemeModalVisible = true) }
+    }
+
+    fun hideThemeModal() {
+        updateState { it.copy(isThemeModalVisible = false) }
+    }
+
+    fun onThemeSelected(theme: ThemeType) {
+        updateState { it.copy(selectedTheme = theme, isThemeModalVisible = false) }
+        // TODO: Persist theme change
+    }
+
+    fun showLanguageModal() {
+        updateState { it.copy(isLanguageModalVisible = true) }
+    }
+
+    fun hideLanguageModal() {
+        updateState { it.copy(isLanguageModalVisible = false) }
+    }
+
+    fun onLanguageSelected(language: LanguageType) {
+        updateState { it.copy(selectedLanguage = language, isLanguageModalVisible = false) }
+        // TODO: Persist language change
     }
 }

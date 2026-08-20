@@ -22,12 +22,13 @@ import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 @Composable
 fun SettingsValueItem(
     label: String,
-    value: String
+    value: String,
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { onClick() }
             .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

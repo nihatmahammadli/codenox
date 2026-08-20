@@ -99,7 +99,7 @@ fun OnboardingScreen(
                             painter = painterResource(id = R.drawable.ic_arrow_right),
                             contentDescription = null,
                             modifier = Modifier.size(20.dp),
-                            tint = if (uiState.isButtonEnabled) Color.Black else Color.Gray
+                            tint = Color.Black
                         )
                     }
                 )

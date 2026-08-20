@@ -26,12 +26,13 @@ import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 fun SettingsProfileItem(
     name: String,
     username: String,
-    imageRes: Int
+    imageRes: Int,
+    onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable(onClick = onClick)
             .padding(horizontal = 20.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

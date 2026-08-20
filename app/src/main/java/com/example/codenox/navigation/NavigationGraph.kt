@@ -6,8 +6,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.codenox.feature.auth.presentation.onboarding.OnboardingScreen
-import com.example.codenox.feature.main.presentation.settings.SettingsScreen
 import com.example.codenox.feature.auth.presentation.splash.SplashScreen
+import com.example.codenox.feature.main.presentation.email.AddEmailScreen
+import com.example.codenox.feature.main.presentation.settings.SettingsScreen
+import com.example.codenox.feature.main.presentation.editname.EditNameScreen
+import com.example.codenox.feature.main.presentation.dailygoal.DailyGoalScreen
 
 @Composable
 fun NavigationGraph(
@@ -52,10 +55,42 @@ fun NavigationGraph(
                 onBackClick = {
                     navController.popBackStack()
                 },
+                onEditNameClick = {
+                    navController.navigate(Screen.EditName.route)
+                },
+                onEditEmailClick = {
+                    navController.navigate(Screen.AddEmail.route)
+                },
+                onDailyGoalClick = {
+                    navController.navigate(Screen.DailyGoal.route)
+                },
                 onLogoutClick = {
                     navController.navigate(Screen.Onboarding.route) {
                         popUpTo(0) { inclusive = true }
                     }
+                }
+            )
+        }
+
+        composable(route = Screen.AddEmail.route) {
+            AddEmailScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                })
+        }
+
+        composable(route = Screen.EditName.route) {
+            EditNameScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(route = Screen.DailyGoal.route) {
+            DailyGoalScreen(
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
