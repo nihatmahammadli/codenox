@@ -36,7 +36,8 @@ data class CodeNoxColors(
     val greenAlpha15: Color = CodeNoxGreen.copy(alpha = 0.15f),
     val goldAlpha10: Color = CodeNoxGold.copy(alpha = 0.10f),
     val goldAlpha20: Color = CodeNoxGold.copy(alpha = 0.20f),
-    val borderSecondary: Color = BorderSecondary
+    val borderSecondary: Color = BorderSecondary,
+    val darkGreen : Color = Color(0xFF122215)
 )
 
 val LocalCodeNoxColors = staticCompositionLocalOf { CodeNoxColors() }

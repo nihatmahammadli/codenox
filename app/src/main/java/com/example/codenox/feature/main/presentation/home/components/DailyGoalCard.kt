@@ -1,5 +1,6 @@
 package com.example.codenox.feature.main.presentation.home.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.example.codenox.core.common.glowCardBackground
 import com.example.codenox.core.designsystem.components.SegmentedCircularProgressIndicator
@@ -21,12 +23,15 @@ import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 fun DailyGoalCard(
     modifier: Modifier = Modifier,
     goalTime: String = "0/60m",
-    progress: Float = 0f
+    progress: Float = 0f,
+    onClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(190.dp)
+            .clip(CodeNoxTheme.shapes.large) // Ensure ripple is clipped
+            .clickable(onClick = onClick)
             .glowCardBackground(
                 backgroundColor = CodeNoxTheme.colors.surface,
                 glowColor = CodeNoxTheme.colors.greenAlpha10,

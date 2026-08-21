@@ -22,7 +22,7 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = Color.Black,
     onSecondary = Color.Black,
     onBackground = TextPrimary,
-    onSurface = TextPrimary
+    onSurface = TextPrimary,
 )
 
 // If you want a dark-themed app by default, LightColorScheme should also use dark colors

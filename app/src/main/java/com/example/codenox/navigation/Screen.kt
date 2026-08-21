@@ -2,6 +2,7 @@ package com.example.codenox.navigation
 
 sealed class Screen(val route: String) {
     data object Splash : Screen("splash")
+
     data object Onboarding : Screen("onboarding")
     data object Main : Screen("main")
     data object Home : Screen("home")
@@ -12,6 +13,9 @@ sealed class Screen(val route: String) {
     data object AddEmail:  Screen("addEmail")
     data object EditName : Screen("edit_name")
     data object DailyGoal : Screen("daily_goal")
+    data object Lesson : Screen("lesson")
+    data object Saved : Screen("saved")
+    data object Timer : Screen("timer")
     
     // Example for parameterized routes
     data class Detail(val id: String) : Screen("detail/$id") {

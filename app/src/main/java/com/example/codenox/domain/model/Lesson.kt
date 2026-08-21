@@ -8,8 +8,8 @@ enum class LessonStatus {
 
 data class Lesson(
     val id: String,
-    val index: String, // e.g., "01", "02"
-    val category: String, // e.g., "UI Basics"
+    val index: String,
+    val category: String,
     val title: String,
     val description: String = "",
     val duration: String = "",

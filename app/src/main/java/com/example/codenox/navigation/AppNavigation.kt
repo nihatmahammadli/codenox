@@ -8,6 +8,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
@@ -33,6 +34,9 @@ fun AppNavigation() {
 @Composable
 fun MainScreen(
     onSettingsClick: () -> Unit,
+    onResumeClick: () -> Unit,
+    onSavedClick: () -> Unit,
+    onTimerClick: () -> Unit,
     initialTab: BottomBarTab = BottomBarTab.HOME,
     onBackToHome: () -> Unit
 ) {
@@ -43,17 +47,17 @@ fun MainScreen(
     )
     val scope = rememberCoroutineScope()
 
-    val navigateToTab: (BottomBarTab) -> Unit = { tab ->
-        scope.launch {
-            pagerState.animateScrollToPage(tab.ordinal)
+    val navigateToTab: (BottomBarTab) -> Unit = remember(pagerState, scope) {
+        { tab: BottomBarTab ->
+            scope.launch {
+                pagerState.animateScrollToPage(tab.ordinal)
+            }
         }
     }
 
     // Handle system back button inside MainScreen
     BackHandler(enabled = pagerState.currentPage != BottomBarTab.HOME.ordinal) {
-        if (pagerState.currentPage != BottomBarTab.HOME.ordinal) {
-            navigateToTab(BottomBarTab.HOME)
-        }
+        navigateToTab(BottomBarTab.HOME)
     }
 
     Scaffold(
@@ -78,14 +82,19 @@ fun MainScreen(
                 BottomBarTab.HOME -> HomeScreen(
                     onLearnClick = { navigateToTab(BottomBarTab.LEARN) },
                     onTrophiesClick = { navigateToTab(BottomBarTab.TROPHIES) },
-                    onProfileClick = { navigateToTab(BottomBarTab.PROFILE) }
+                    onProfileClick = { navigateToTab(BottomBarTab.PROFILE) },
+                    onTimerClick = onTimerClick
                 )
 
-                BottomBarTab.LEARN -> LearnScreen()
+                BottomBarTab.LEARN -> LearnScreen(
+                    onResumeClick = onResumeClick,
+                    onSavedClick = onSavedClick
+                )
                 BottomBarTab.TROPHIES -> TrophiesScreen()
                 BottomBarTab.PROFILE -> ProfileScreen(
                     onSettingsClick = onSettingsClick,
-                    onLearnClick = { navigateToTab(BottomBarTab.LEARN) }
+                    onLearnClick = { navigateToTab(BottomBarTab.LEARN) },
+                    onSavedClick = onSavedClick
                 )
             }
         }

@@ -29,8 +29,7 @@ fun LearnSearchBar(
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 16.dp),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Search TextField

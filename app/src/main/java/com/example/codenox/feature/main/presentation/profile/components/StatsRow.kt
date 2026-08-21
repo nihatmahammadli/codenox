@@ -9,15 +9,16 @@ import androidx.compose.ui.unit.dp
 import com.example.codenox.core.designsystem.theme.CodeNoxTheme
 
 @Composable
-fun StatsRow() {
+fun StatsRow(onSavedClick: () -> Unit = {}) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         StatCard(
-            value = "0",
-            label = "Courses Done",
-            modifier = Modifier.weight(1f)
+            value = "3",
+            label = "Saved Lessons",
+            modifier = Modifier.weight(1f),
+            onClick = onSavedClick
         )
         StatCard(
             value = "0",

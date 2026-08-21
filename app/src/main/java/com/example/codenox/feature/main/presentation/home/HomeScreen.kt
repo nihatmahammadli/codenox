@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,38 +32,43 @@ fun HomeScreen(
     onLearnClick: () -> Unit = {},
     onTrophiesClick: () -> Unit = {},
     onProfileClick: () -> Unit = {},
+    onTimerClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
 
-    val historyItems = emptyList<HistoryItem>()
+    val historyItems = remember { emptyList<HistoryItem>() }
 
-    val activeLesson = Lesson(
-        id = "1",
-        index = "01",
-        category = "Fundamentals",
-        title = "Getting Started",
-        description = "Learn the basics of Android development and set up your environment.",
-        duration = "10m",
-        xp = 20,
-        status = LessonStatus.ACTIVE
-    )
+    val activeLesson = remember {
+        Lesson(
+            id = "1",
+            index = "01",
+            category = "Fundamentals",
+            title = "Getting Started",
+            description = "Learn the basics of Android development and set up your environment.",
+            duration = "10m",
+            xp = 20,
+            status = LessonStatus.ACTIVE
+        )
+    }
 
-    val sampleModule = Module(
-        id = "1",
-        title = "Kotlin Basics",
-        moduleNumber = 1,
-        lessons = listOf(
-            activeLesson,
-            Lesson(
-                id = "2",
-                index = "02",
-                category = "Fundamentals",
-                title = "Variables & Types",
-                status = LessonStatus.LOCKED
+    val sampleModule = remember(activeLesson) {
+        Module(
+            id = "1",
+            title = "Kotlin Basics",
+            moduleNumber = 1,
+            lessons = listOf(
+                activeLesson,
+                Lesson(
+                    id = "2",
+                    index = "02",
+                    category = "Fundamentals",
+                    title = "Variables & Types",
+                    status = LessonStatus.LOCKED
+                )
             )
         )
-    )
+    }
     BaseScreen<HomeUiState,HomeViewModel>() { uiState, viewModel ->
 
         CodeNoxBackground(modifier = modifier) {
@@ -88,7 +94,10 @@ fun HomeScreen(
                         modifier = Modifier.weight(1f),
                         onStreakClick = onTrophiesClick
                     )
-                    DailyGoalCard(modifier = Modifier.weight(1f))
+                    DailyGoalCard(
+                        modifier = Modifier.weight(1f),
+                        onClick = onTimerClick
+                    )
                 }
 
                 ActiveLessonCard(

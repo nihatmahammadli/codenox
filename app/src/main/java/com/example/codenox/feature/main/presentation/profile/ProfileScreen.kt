@@ -17,7 +17,8 @@ import com.example.codenox.feature.main.presentation.profile.components.StatsRow
 @Composable
 fun ProfileScreen(
     onSettingsClick: () -> Unit = {},
-    onLearnClick: () -> Unit = {}
+    onLearnClick: () -> Unit = {},
+    onSavedClick: () -> Unit = {}
 ) {
     BaseScreen<ProfileUiState, ProfileViewModel> { uiState, viewModel ->
         CodeNoxBackground {
@@ -32,7 +33,7 @@ fun ProfileScreen(
                 Spacer(modifier = Modifier.height(24.dp))
                 ProfileUserCard(state = uiState)
                 Spacer(modifier = Modifier.height(24.dp))
-                StatsRow()
+                StatsRow(onSavedClick = onSavedClick)
                 Spacer(modifier = Modifier.height(32.dp))
                 LearningProgressSection(onClick = onLearnClick)
                 Spacer(modifier = Modifier.height(32.dp))
