@@ -22,7 +22,6 @@ import kotlin.coroutines.cancellation.CancellationException
 
 abstract class BaseViewModel<UiState> : ViewModel() {
 
-    // region State
     private val _baseUiState = MutableStateFlow(BaseUiState())
     val baseUiState: StateFlow<BaseUiState> = _baseUiState.asStateFlow()
 
@@ -37,9 +36,7 @@ abstract class BaseViewModel<UiState> : ViewModel() {
     protected fun updateState(update: (UiState) -> UiState) {
         _uiState.update(update)
     }
-    // endregion
 
-    // region Navigation
     private val _navigationEvent = MutableSharedFlow<NavigationEvent>(
         replay = 0,
         extraBufferCapacity = 1,
@@ -72,15 +69,11 @@ abstract class BaseViewModel<UiState> : ViewModel() {
             _navigationEvent.emit(NavigationEvent.Back)
         }
     }
-    // endregion
-
-    // region Loading
     protected fun setLoading(isLoading: Boolean) {
         _baseUiState.update { it.copy(loadStates = if (isLoading) LoadStates.Loading else LoadStates.Idle) }
     }
     // endregion
 
-    // region User Messages
     protected fun showSuccessMessage(message: String? = null, title: String? = null) {
         showUserMessage(UserMessageState.Success(message = message, title = title))
     }
@@ -100,9 +93,6 @@ abstract class BaseViewModel<UiState> : ViewModel() {
     private fun showUserMessage(state: UserMessageState) {
         _baseUiState.update { it.copy(userMessageState = state) }
     }
-    // endregion
-
-    // region Execution Helpers
     protected fun launchWithLoading(
         showLoading: Boolean = true,
         onError: ((Throwable) -> Unit)? = null,

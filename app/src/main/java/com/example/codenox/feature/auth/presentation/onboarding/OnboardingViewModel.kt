@@ -1,13 +1,12 @@
 package com.example.codenox.feature.auth.presentation.onboarding
 
-import androidx.lifecycle.viewModelScope
-import com.example.codenox.core.util.Util
 import com.example.codenox.core.designsystem.base.BaseViewModel
 import com.example.codenox.domain.repository.ProfileRepository
+import com.example.codenox.feature.auth.presentation.onboarding.components.OnboardingAction
+import com.example.codenox.feature.auth.presentation.onboarding.components.OnboardingEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

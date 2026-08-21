@@ -1,4 +1,4 @@
-package com.example.codenox.feature.auth.presentation.onboarding
+package com.example.codenox.feature.auth.presentation.onboarding.components
 
 sealed interface OnboardingEffect {
 
