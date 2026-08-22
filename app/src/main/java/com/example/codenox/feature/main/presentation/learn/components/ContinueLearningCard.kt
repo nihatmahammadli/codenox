@@ -1,10 +1,12 @@
 package com.example.codenox.feature.main.presentation.learn.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +37,6 @@ fun ContinueLearningCard(
             .padding(24.dp)
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            // Header: NEXT: LESSON X.X
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_active_lesson),
@@ -51,14 +52,12 @@ fun ContinueLearningCard(
                 )
             }
 
-            // Title
             Text(
                 text = data.title,
                 style = CodeNoxTheme.typography.jetBrainsMono24Bold,
                 color = CodeNoxTheme.colors.textPrimary
             )
 
-            // Description
             Text(
                 text = data.description,
                 style = CodeNoxTheme.typography.dmSans14Regular,
@@ -66,7 +65,6 @@ fun ContinueLearningCard(
                 lineHeight = 20.sp
             )
 
-            // Footer
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -77,7 +75,7 @@ fun ContinueLearningCard(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     InfoItem(icon = R.drawable.ic_time, text = data.duration)
-                    InfoItem(icon = R.drawable.ic_launcher_foreground, text = data.level) // level icon placeholder
+                    InfoItem(icon = R.drawable.ic_launcher_foreground, text = data.level)
                 }
 
                 Row(
@@ -87,11 +85,11 @@ fun ContinueLearningCard(
                     Text(
                         text = "Resume",
                         style = CodeNoxTheme.typography.dmSans16Bold,
-                        color = CodeNoxTheme.colors.primary
+                        color = CodeNoxTheme.colors.primary,
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_arrow_right),
+                        painter = painterResource(id = R.drawable.ic_arrow_right_small),
                         contentDescription = null,
                         tint = CodeNoxTheme.colors.primary,
                         modifier = Modifier.size(16.dp)

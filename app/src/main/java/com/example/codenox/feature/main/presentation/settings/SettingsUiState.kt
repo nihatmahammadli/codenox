@@ -19,7 +19,7 @@ enum class ThemeType(val label: String) {
 }
 
 enum class LanguageType(val label: String) {
-    TURKISH("Türkçe"),
+    TURKISH("Azərbaycanca"),
     ENGLISH("English"),
-    GERMAN("Deutsch")
+    GERMAN("Turkish")
 }

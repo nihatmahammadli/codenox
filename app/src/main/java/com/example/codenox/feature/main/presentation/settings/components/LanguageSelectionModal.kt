@@ -120,7 +120,6 @@ private fun LanguageOptionItem(
             color = if (isSelected) Color.White else CodeNoxTheme.colors.textSecondary
         )
         
-        // Simple Radio Button representation
         Box(
             modifier = Modifier
                 .size(20.dp)

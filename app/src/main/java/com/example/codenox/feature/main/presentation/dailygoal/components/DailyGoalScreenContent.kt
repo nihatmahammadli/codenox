@@ -132,7 +132,7 @@ fun DailyGoalScreenContent(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_star),
+                        painter = painterResource(id = R.drawable.ic_advice),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
                         tint = CodeNoxTheme.colors.primary

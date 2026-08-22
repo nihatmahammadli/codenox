@@ -50,21 +50,21 @@ fun ThemeSelectionModal(
             ) {
                 ThemeOptionItem(
                     label = "Light",
-                    icon = R.drawable.ic_daily_streak, // Replace with sun icon if available
+                    icon = R.drawable.ic_light_theme,
                     isSelected = selectedTheme == ThemeType.LIGHT,
                     modifier = Modifier.weight(1f),
                     onClick = { selectedTheme = ThemeType.LIGHT }
                 )
                 ThemeOptionItem(
                     label = "Dark",
-                    icon = R.drawable.ic_active_lesson, // Replace with moon icon if available
+                    icon = R.drawable.ic_dark_theme,
                     isSelected = selectedTheme == ThemeType.DARK,
                     modifier = Modifier.weight(1f),
                     onClick = { selectedTheme = ThemeType.DARK }
                 )
                 ThemeOptionItem(
                     label = "System",
-                    icon = R.drawable.ic_settings, // Replace with system icon if available
+                    icon = R.drawable.ic_system_theme,
                     isSelected = selectedTheme == ThemeType.SYSTEM,
                     modifier = Modifier.weight(1f),
                     onClick = { selectedTheme = ThemeType.SYSTEM }

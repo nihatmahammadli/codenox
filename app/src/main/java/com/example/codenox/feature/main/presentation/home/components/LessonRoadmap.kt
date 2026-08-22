@@ -28,7 +28,6 @@ fun LessonRoadmap(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        // Roadmap Header
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,7 +46,6 @@ fun LessonRoadmap(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Roadmap List
         module.lessons.forEachIndexed { index, lesson ->
             LessonRoadmapItem(
                 lesson = lesson,
@@ -70,7 +68,6 @@ private fun LessonRoadmapItem(
             .height(IntrinsicSize.Min)
             .clickable(onClick = onClick)
     ) {
-        // Left Path Section
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.width(48.dp)
@@ -92,7 +89,6 @@ private fun LessonRoadmapItem(
             }
         }
 
-        // Content Section
         Box(
             modifier = Modifier
                 .weight(1f)

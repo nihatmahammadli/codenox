@@ -22,7 +22,6 @@ fun TrophyHeader(info: UserTrophyInfo) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.padding(top = 16.dp)
     ) {
-        // Main Badge with Level
         Box(contentAlignment = Alignment.BottomEnd) {
             Box(
                 modifier = Modifier
@@ -34,7 +33,7 @@ fun TrophyHeader(info: UserTrophyInfo) {
                     painter = painterResource(id = R.drawable.ic_trophies),
                     contentDescription = null,
                     tint = CodeNoxTheme.colors.primary,
-                    modifier = Modifier.size(50.dp)
+                    modifier = Modifier.size(50.dp),
                 )
             }
             

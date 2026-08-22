@@ -74,9 +74,8 @@ fun AddEmailBody(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_code_nox_logo),
+                    painter = painterResource(id = R.drawable.ic_verification),
                     contentDescription = null,
-                    modifier = Modifier.size(20.dp),
                     tint = CodeNoxTheme.colors.primary
                 )
             }
@@ -84,7 +83,7 @@ fun AddEmailBody(
             Spacer(modifier = Modifier.width(16.dp))
 
             Text(
-                text = "A verification link will be sent to your new email address.",
+                text = "A verification link will be sent to your email address.",
                 style = CodeNoxTheme.typography.dmSans14Regular,
                 color = CodeNoxTheme.colors.textSecondary,
                 lineHeight = 20.sp
